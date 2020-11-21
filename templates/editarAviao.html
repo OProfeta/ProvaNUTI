@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Editar nome de aviao</title>
+<title>Editar nome de avião</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
 
-    <h1>Editar nome do aviao</h1>
+    <h1>Editar nome do avião</h1>
 
     <table>
         <tr>
             <th>id</th>
-            <th>Nome do aviao</th>
+            <th>Nome do avião</th>
         </tr>
         <tr>
             {% for a in aviao %}
@@ -27,7 +27,7 @@
         <input name="nome" id="nome" type="text" required>
         <br/>
 
-        <input type="submit" value="Editar aviao">
+        <input type="submit" value="Editar avião">
     </form>
     {% endfor %}
     <a href="/cadastroAviao">Retornar</a>
