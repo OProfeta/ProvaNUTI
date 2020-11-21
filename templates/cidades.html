@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Cadastramento de cidades</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Cadastro de cidade(?)</h1>
+    {% if cidades|length < 1 %}
+        <h4 style="text-align: center;">Nao ha cidades</h4>
+    {% else %}
+
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Nome do aviao</th>
+            </tr>
+
+            {% for cidade in cidades %}
+                <tr>
+                    <td>{{ cidade[0] }}</td>
+                    <td>{{ cidade[1] }}</td>
+                    <td><a href="/editarCidade/{{ cidade[0] }}">Editar nome</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <form action="/cadastroCidade" method="POST">
+        <label for="nome">Informe o nome da cidade:</label><br/>
+        <input name="nome" id="nome" type="text" required>
+        <br/>
+
+        <input type="submit" value="Cadastrar cidade">
+    </form>
+
+    <a href="/">Retornar</a>
+</div>
+{% endblock %}

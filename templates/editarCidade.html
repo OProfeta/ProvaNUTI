@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Editar nome de cidade</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+
+    <h1>Editar nome da cidade</h1>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Nome da cidade</th>
+        </tr>
+        <tr>
+            {% for c in cidade %}
+                <td>{{ c[0] }}</td>
+                <td>{{ c[1] }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+    {% for c in cidade %}
+    <form action="/editarCidade/{{ c[0] }}" method="POST">
+        <label for="nome">Informe o nome da cidade:</label><br/>
+        <input name="nome" id="nome" type="text" required>
+        <br/>
+
+        <input type="submit" value="Editar cidade">
+    </form>
+    {% endfor %}
+    <a href="/cadastroCidade">Retornar</a>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Cadastramento de avioes</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Cadastro de aviao(?)</h1>
+    {% if avioes|length < 1 %}
+        <h4 style="text-align: center;">Nao ha avioes</h4>
+    {% else %}
+
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Nome do aviao</th>
+            </tr>
+
+            {% for aviao in avioes %}
+                <tr>
+                    <td>{{ aviao[0] }}</td>
+                    <td>{{ aviao[1] }}</td>
+                    <td><a href="/editarAviao/{{ aviao[0] }}">Editar nome</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <form action="/cadastroAviao" method="POST">
+        <label for="nome">Informe o nome do aviao:</label><br/>
+        <input name="nome" id="nome" type="text" required>
+        <br/>
+
+        <input type="submit" value="Cadastrar aviao">
+    </form>
+
+    <a href="/">Retornar</a>
+
+</div>
+{% endblock %}

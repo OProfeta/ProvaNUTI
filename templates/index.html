@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Cadastramento de vôos</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Cadastro de vôo</h1>
+    {% if voos|length < 1 %}
+    <h4 style="text-align: center;">Nao ha voos</h4>
+    {% else %}
+
+    <!--
+    <table>
+        <tr>
+            <th>id</th>
+            <th>idAviao</th>
+            <th>idCidadeOrigem</th>
+            <th>idCidadeDestino</th>
+            <th>Ano</th>
+            <th>Mes</th>
+            <th>Dia</th>
+            <th>Horario</th>
+            <th>Duracao</th>
+        </tr>
+
+        {% for voo in voos %}
+            <tr>
+                <td>{{ voo[0] }}</td>
+                <td>{{ voo[1] }}</td>
+                <td>{{ voo[2] }}</td>
+                <td>{{ voo[3] }}</td>
+                <td>{{ voo[4] }}</td>
+                <td>{{ voo[5] }}</td>
+                <td>{{ voo[6] }}</td>
+                <td>{{ voo[7] }}</td>
+                <td>{{ voo[8] }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    -->
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Aviao</th>
+            <th>Cidade de Origem</th>
+            <th>Cidade de Destino</th>
+            <th>Ano</th>
+            <th>Mes</th>
+            <th>Dia</th>
+            <th>Horario</th>
+            <th>Duracao</th>
+        </tr>
+
+        {% for voo in voos %}
+            <tr>
+                <td>{{ voo[0] }}</td>
+                {% for aviao in avioes %}
+                    {% if aviao[0] == voo[1] %}
+                        <td>{{ aviao[1] }}</td>
+                    {% endif %}
+                {% endfor %}
+
+                {% for cidade in cidades %}
+                    {% if cidade[0] == voo[2] %}
+                        <td>{{ cidade[1] }}</td>
+                    {% endif %}
+                {% endfor %}
+
+                {% for cidade in cidades %}
+                    {% if cidade[0] == voo[3] %}
+                        <td>{{ cidade[1] }}</td>
+                    {% endif %}
+                {% endfor %}
+                <td>{{ voo[4] }}</td>
+                <td>{{ voo[5] }}</td>
+                <td>{{ voo[6] }}</td>
+
+                <td>{{ voo[7] }}{{ ":00" }}</td>
+                <td>{{ voo[8] }}{{ ":00" }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    {% endif %}
+
+
+    <!--
+    <form action="/" method="POST">
+        idAviao<br/><input type="text" name="idAviao" id="idAviao"><br/>
+        idCidadeOrigem<br/><input type="text" name="idCidadeOrigem" id="idCidadeOrigem"><br/>
+        idCidadeDestino<br/><input type="text" name="idCidadeDestino" id="idCidadeDestino"><br/>
+        ano<br/><input type="text" name="ano" id="ano"><br/>
+        mes<br/><input type="text" name="mes" id="mes"><br/>
+        dia<br/><input type="text" name="dia" id="dia"><br/>
+        horario<br/><input type="text" name="horario" id="horario"><br/>
+        duracao<br/><input type="text" name="duracao" id="duracao"><br/>
+        <input type="submit" value="Cadastrar vôo">
+    </form>
+    -->
+    <form action="/" method="POST">
+        <label for="idAviao">Selecione o aviao:</label><br/>
+        <select name="idAviao" id="idAviao" required>
+            <option value=""></option>
+            {% for aviao in avioes %}
+                <option value="{{ aviao[0] }}">{{ aviao[1] }}</option>
+            {% endfor %}
+        </select>
+        <br/>
+
+        <label for="idCidadeOrigem">Selecione a cidade de origem:</label><br/>
+        <select name="idCidadeOrigem" id="idCidadeOrigem" required>
+            <option value=""></option>
+            {% for cidade in cidades %}
+                <option value="{{ cidade[0] }}">{{ cidade[1] }}</option>
+            {% endfor %}
+        </select>
+        <br/>
+
+        <label for="idCidadeDestino">Selecione a cidade de destino:</label><br/>
+        <select name="idCidadeDestino" id="idCidadeDestino" required>
+            <option value=""></option>
+            {% for cidade in cidades %}
+                <option value="{{ cidade[0] }}">{{ cidade[1] }}</option>
+            {% endfor %}
+        </select><br/>
+        <label for="data">Selecione a data do voo:</label><br/>
+        <input name="data" id="data" type="date" required>
+        <br/>
+
+        <label for="horario">Selecione o horario do voo:</label><br/>
+        <select name="horario" id="horario" required>
+            <option value=""></option>
+            {% for hora in range(24) %}
+                <option value="{{ hora }}">{{ hora }}{{ ":00" }}</option>
+            {% endfor %}
+        </select>
+        <br/>
+
+        <label for="duracao">Selecione a duracao do voo:</label><br/>
+        <input name="duracao" id="duracao" type="number" min="1" value="1" required>
+        <br/>
+
+        <input type="submit" value="Cadastrar voo">
+    </form>
+
+    <a href="/cadastroAviao">Cadastrar Aviao</a>
+    <a href="/cadastroCidade">Cadastrar Cidade</a>
+
+</div>
+{% endblock %}
